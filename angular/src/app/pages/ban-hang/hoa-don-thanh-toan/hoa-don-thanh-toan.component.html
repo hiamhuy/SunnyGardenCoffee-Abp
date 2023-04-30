@@ -1,0 +1,66 @@
+<div class="container">
+    <div nz-row>
+        <div nz-col class="gutter-row" [nzXs]="24" [nzSm]="24">
+            <img class="custom__img" src="../../../../assets/img/logo/logo.png" alt="" />
+            <div class="font__weight">Thời gian : {{ hoaDon.thoiGianBan | date : "dd/MM/yyyy HH:mm" }}</div>
+            <div *ngIf="hoaDon.kieuMua == BILLTYPE.TaiQuan" class="font__weight">Bàn : {{ hoaDon.tenBan }}</div>
+            <hr />
+        </div>
+        <div nz-col class="gutter-row" [nzXs]="24" [nzSm]="24">
+            <div *ngFor="let thucDon of hoaDon?.danhSachThucDonDto">
+                <div class="hoadon__ten">
+                    <span>{{ thucDon?.thucDonName }}</span>
+                </div>
+                <div class="hoadon__gia flex_custom">
+                    <span>{{ thucDon?.gia | currency : "VND" : "VNĐ" | splitVND : thucDon.gia }}</span>
+                    <span class="ml-2">x</span>
+                    <span>SL: {{ thucDon?.soLuong }}</span>
+                    <span class="ml-2">=</span>
+                    <span>{{
+                        thucDon?.gia * thucDon?.soLuong
+                            | currency : "VND" : "VNĐ"
+                            | splitVND : thucDon?.gia * thucDon?.soLuong
+                    }}</span>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div nz-col class="gutter-row mb-1" [nzXs]="24" [nzSm]="24">
+            <div class="hoadon__tongtien flex_custom">
+                <span>Tổng tiền :</span>
+                <input-price [value]="hoaDon.tongTien" [disabled]="true"></input-price>
+            </div>
+        </div>
+        <div nz-col class="gutter-row mb-1" [nzXs]="24" [nzSm]="24">
+            <div class="hoadon__chietkhau flex_custom">
+                <span>Chiết khấu :</span>
+                <input-percen [value]="hoaDon.chietKhau" (valueOutput)="tinhTienThuc($event)"></input-percen>
+            </div>
+        </div>
+        <div nz-col class="gutter-row mb-1" [nzXs]="24" [nzSm]="24">
+            <div class="flex_custom">
+                <span>Tổng tiền cần trả :</span>
+                <input-price [value]="hoaDon.tongTienThuc" [disabled]="true"></input-price>
+            </div>
+        </div>
+        <div nz-col class="gutter-row mb-1" [nzXs]="24" [nzSm]="24">
+            <div class="flex_custom">
+                <span>Tiền khách đưa :</span>
+                <input-price [value]="hoaDon.tienKhachDua" (valueOutput)="tinhTienThua($event)"></input-price>
+            </div>
+        </div>
+        <div nz-col class="gutter-row mb-1" [nzXs]="24" [nzSm]="24">
+            <div class="flex_custom">
+                <span>Tiền thừa :</span>
+                <input-price [value]="hoaDon.tienTraLai" [disabled]="true"></input-price>
+            </div>
+        </div>
+        <div nz-col class="gutter-row mb-2 mt-2" [nzXs]="24" [nzSm]="24">
+            <div class="right">
+                <button nz-button nzType="primary" (click)="thanhToan()" [disabled]="isDisabled">
+                    <i class="fas fa-cash-register mr-2"></i>Thanh Toán
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

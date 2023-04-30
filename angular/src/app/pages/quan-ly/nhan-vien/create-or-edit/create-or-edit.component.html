@@ -1,0 +1,77 @@
+<div class="modal-body">
+    <div nz-row>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Mã nhân viên </label> <span style="color: red">*</span>
+            <div>
+                <input
+                    nz-input
+                    required
+                    maxlength="12"
+                    [(ngModel)]="dataItem.personnalCode"
+                    #personnalCodeModel="ngModel"
+                    #personnalCodeEl
+                />
+                <abp-validation-summary
+                    [control]="personnalCodeModel"
+                    [controlEl]="personnalCodeEl"
+                ></abp-validation-summary>
+            </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Tên nhân viên </label> <span style="color: red">*</span>
+            <div>
+                <input
+                    nz-input
+                    required
+                    [(ngModel)]="dataItem.personnalName"
+                    #personnalNameModel="ngModel"
+                    #personnalNameEl
+                />
+                <abp-validation-summary
+                    [control]="personnalNameModel"
+                    [controlEl]="personnalNameEl"
+                ></abp-validation-summary>
+            </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Ngày sinh </label>
+            <input-date-picker [(ngModel)]="dataItem.dateOfBirth"></input-date-picker>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Số điện thoại </label> <span style="color: red">*</span>
+            <div>
+                <input-number [value]="dataItem.phoneNumber" (emitValue)="getNumber($event)"></input-number>
+            </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Địa chỉ </label> <span style="color: red">*</span>
+            <div>
+                <input nz-input required [(ngModel)]="dataItem.address" #addressModel="ngModel" #addressEl />
+                <abp-validation-summary [control]="addressModel" [controlEl]="addressEl"></abp-validation-summary>
+            </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Ngày vào làm việc </label>
+            <input-date-picker [(ngModel)]="dataItem.dateToWork"></input-date-picker>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Vị trí </label> <span style="color: red">*</span>
+            <role-comp (eventChange)="changePosition($event)" [(ngModel)]="dataItem.positionId"></role-comp>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Trạng thái </label> <span style="color: red">*</span>
+            <div>
+                <nz-radio-group [(ngModel)]="dataItem.status">
+                    <label nz-radio [nzValue]="TRANG_THAI.DangHoatDong">Đang hoạt động</label>
+                    <label nz-radio [nzValue]="TRANG_THAI.NgungHoatDong">Ngưng hoạt động</label>
+                </nz-radio-group>
+            </div>
+        </div>
+    </div>
+</div>
+<div *nzModalFooter>
+    <button nz-button nzType="primary" (click)="save()">
+        {{ titleButton }}
+    </button>
+    <button nz-button nzType="default" (click)="close()">Hủy</button>
+</div>

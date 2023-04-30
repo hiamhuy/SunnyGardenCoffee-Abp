@@ -1,0 +1,182 @@
+<nz-table
+    #table
+    [nzData]="rows"
+    nzShowSizeChanger
+    [nzFrontPagination]="frontPagination"
+    [nzLoading]="isLoading"
+    class="table-custom"
+    [nzTotal]="totalRows"
+    [nzShowTotal]="totalTpl"
+    [nzShowPagination]="false"
+    [(nzPageIndex)]="page"
+    [(nzPageSize)]="pageSize"
+    [nzBordered]="bordered"
+    nzPaginationType=""
+    (nzPageIndexChange)="onPageNumberChange($event)"
+    (nzPageSizeChange)="onPageSizeChange($event)"
+    [nzPageSizeOptions]="pageSizeOptions"
+    [nzScroll]="scroll"
+>
+    <thead *ngIf="!hiddenHeader" (nzSortOrderChange)="onSort($event)">
+        <tr>
+            <ng-container *ngFor="let column of columns; index as i">
+                <th
+                    [nzLeft]="column.fixLeft"
+                    [nzRight]="column.fixRight"
+                    *ngIf="column.dataType === 'Select'; else colThDefault"
+                    nzWidth="{{ column.width + 'px' }}"
+                    [nzAlign]="column.headerAlign ? column.headerAlign : column.align"
+                    [nzShowCheckbox]="isMulti"
+                    [(nzChecked)]="allChecked"
+                    [nzDisabled]="allCheckboxDisabled"
+                    [nzIndeterminate]="checkboxIndeterminate"
+                    (nzCheckedChange)="checkAll($event)"
+                >
+                    <ng-container *ngIf="column.tplHeader">
+                        <ng-container *ngTemplateOutlet="column.tplHeader.template"></ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="!column.tplHeader">
+                        <ng-container *nzStringTemplateOutlet="column.header">
+                            {{ column.header }}
+                        </ng-container>
+                    </ng-container>
+                </th>
+                <ng-template #colThDefault>
+                    <th
+                        [nzLeft]="column.fixLeft"
+                        [nzRight]="column.fixRight"
+                        nzWidth="{{ column.width + 'px' }}"
+                        [nzAlign]="column.headerAlign ? column.headerAlign : column.align"
+                        [nzShowSort]="column.sort"
+                        [nzSortFn]="true"
+                        [nzColumnKey]="column.key"
+                    >
+                        <ng-container *ngIf="column.tplHeader">
+                            <ng-container *ngTemplateOutlet="column.tplHeader.template"></ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="!column.tplHeader">
+                            <ng-container *nzStringTemplateOutlet="column.header">
+                                {{ column.header }}
+                            </ng-container>
+                        </ng-container>
+                    </th>
+                </ng-template>
+            </ng-container>
+        </tr>
+    </thead>
+    <tbody *ngIf="rows">
+        <tr
+            *ngFor="let data of table.data; index as i"
+            (click)="onRowClick(data, i)"
+            [class.is-selected]="i === indexSelected"
+        >
+            <ng-container *ngFor="let column of columns">
+                <td
+                    [width]="column.width"
+                    [nzLeft]="column.fixLeft"
+                    [nzRight]="column.fixRight"
+                    *ngIf="column.dataType === 'Select'; else colTdDefault"
+                    [nzAlign]="column.contentAlign ? column.contentAlign : column.align"
+                    nzShowCheckbox
+                    [(nzChecked)]="data.checked"
+                    [nzDisabled]="data.disabled"
+                    (nzCheckedChange)="refreshCheckStatus(rows, data)"
+                >
+                    <ng-container *ngIf="column.tplCell">
+                        <ng-container *ngTemplateOutlet="column.tplCell.template; context: { $implicit: data }">
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="!column.tplCell">
+                        <ng-container
+                            *nzStringTemplateOutlet="
+                                column.content;
+                                context: { $implicit: data[column.key], dataItem: data }
+                            "
+                        >
+                            {{ data[column.key] }}
+                        </ng-container>
+                    </ng-container>
+                </td>
+                <ng-template #colTdDefault>
+                    <td
+                        [width]="column.width"
+                        [nzLeft]="column.fixLeft"
+                        [nzRight]="column.fixRight"
+                        [nzAlign]="column.contentAlign ? column.contentAlign : column.align"
+                    >
+                        <ng-container *ngIf="column.tplCell">
+                            <ng-container
+                                *ngTemplateOutlet="column.tplCell.template; context: { $implicit: data, index: i }"
+                            >
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="!column.tplCell">
+                            <ng-container [ngSwitch]="column.dataType">
+                                <ng-container *ngSwitchCase="'Date'">
+                                    {{ data[column.key] | date : "dd/MM/yyyy" }}
+                                </ng-container>
+                                <ng-container *ngSwitchCase="'STT'">
+                                    {{ (page - 1) * pageSize + i + 1 }}
+                                </ng-container>
+                                <ng-container *ngSwitchDefault>
+                                    <ng-container
+                                        *nzStringTemplateOutlet="
+                                            column.content;
+                                            context: {
+                                                $implicit: data[column.key],
+                                                dataItem: data,
+                                                index: i
+                                            }
+                                        "
+                                    >
+                                        {{ data[column.key] }}
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                    </td>
+                </ng-template>
+            </ng-container>
+        </tr>
+    </tbody>
+</nz-table>
+
+<ng-template #nzNoResultTpl let-name>
+    <div style="text-align: center">
+        <ng-content select="[noDataContent]"></ng-content>
+    </div>
+</ng-template>
+
+<ng-template #totalTpl let-range="range" let-total>
+    <span class="kt-font-primary kt-font-bold">Tổng số bản ghi: {{ total }}</span>
+</ng-template>
+
+<div *ngIf="!paginationSimple && !isNoPaging">
+    <table-pagination
+        [ordSize]="ordPaginationSize"
+        [(pageIndex)]="page"
+        [(pageSize)]="pageSize"
+        [totalCount]="totalRows"
+        [check]="table"
+        [pageSizeOptions]="pageSizeOptions"
+        (pageIndexChange)="onPageNumberChange($event); table.onPageIndexChange($event)"
+        (refreshData)="table.onPageIndexChange($event)"
+        (pageSizeChange)="onPageSizeChange($event)"
+    >
+        <ng-container actionTable>
+            <ng-content select="[actionTable]"></ng-content>
+        </ng-container>
+    </table-pagination>
+</div>
+
+<div class="div-pagination-simple" *ngIf="paginationSimple && !isNoPaging">
+    <nz-pagination
+        (nzPageIndexChange)="onPageNumberChange($event); table.onPageIndexChange($event)"
+        [nzPageSize]="table.nzPageSize"
+        [(nzPageIndex)]="table.nzPageIndex"
+        [nzTotal]="table.nzTotal"
+        nzSimple
+        nzNotFoundContent="'Không có dữ liệu!'"
+    >
+    </nz-pagination>
+</div>

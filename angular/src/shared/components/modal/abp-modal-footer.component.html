@@ -1,0 +1,13 @@
+<div class="modal-footer">
+  <button nz-button nzType="primary" [disabled]="saveDisabled">
+    {{ saveLabel }}
+  </button>
+  <button
+    nz-button
+    nzType="primary"
+    [disabled]="cancelDisabled"
+    (click)="onCancelClick.emit()"
+  >
+    {{ cancelLabel }}
+  </button>
+</div>

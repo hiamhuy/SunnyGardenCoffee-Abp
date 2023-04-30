@@ -1,0 +1,82 @@
+import { Component, Injector, OnInit } from "@angular/core";
+import { appModuleAnimation } from "@shared/animations/routerTransition";
+import { PagedListingComponentBase, PagedRequestDto } from "@shared/paged-listing-component-base";
+import {
+    BienLaiNhapDto,
+    NguyenLieuAppServicesServiceProxy,
+    NguyenLieuPagingListRequest,
+} from "@shared/service-proxies/service-proxies";
+import { finalize } from "rxjs/operators";
+import { BienLaiCreateOrUpdateComponent } from "./create-or-update/create-or-update.component";
+
+@Component({
+    selector: "app-nguyen-lieu",
+    templateUrl: "./nguyen-lieu.component.html",
+    styleUrls: ["./nguyen-lieu.component.scss"],
+    animations: [appModuleAnimation()],
+})
+export class NguyenLieuComponent extends PagedListingComponentBase<BienLaiNhapDto> implements OnInit {
+    constructor(injector: Injector, private dataService: NguyenLieuAppServicesServiceProxy) {
+        super(injector);
+    }
+    ngOnInit() {
+        this.refresh();
+    }
+    protected fetchDataList(request: PagedRequestDto, pageNumber: number, finishedCallback: () => void): void {
+        let input = Object.assign(new NguyenLieuPagingListRequest(), {
+            ...this.searchDto,
+        });
+
+        input.maxResultCount = request.maxResultCount;
+        input.skipCount = request.skipCount;
+        input.sorting = request.sorting;
+        this.dataService
+            .getPageList(input)
+            .pipe(finalize(finishedCallback))
+            .subscribe((result) => {
+                this.dataList = result.items;
+                this.showPaging(result);
+            });
+    }
+
+    createOrEdit(data?: BienLaiNhapDto) {
+        let sTitle = data?.id > 0 ? "Cập nhật " : "Thêm mới";
+        const modal = this.modalService.create({
+            nzTitle: sTitle,
+            nzContent: BienLaiCreateOrUpdateComponent,
+            nzComponentParams: {
+                dataItem: data || new BienLaiNhapDto(),
+            },
+            nzFooter: null,
+            nzWidth: "60%",
+        });
+
+        modal.afterClose.subscribe((result) => {
+            if (result != null) {
+                this.refresh();
+            }
+        });
+    }
+    delete(dataItem: BienLaiNhapDto): void {
+        this.message.confirm("", "Bạn có chắc chắn muốn xóa bản ghi này?", (isConfirmed) => {
+            if (isConfirmed) {
+                this.dataService.delete(dataItem.id).subscribe(() => {
+                    this.notify.success("Xóa thành công !");
+                    this.refresh();
+                });
+            }
+        });
+    }
+
+    deleteMulti(): void {
+        this.message.confirm("", "Bạn có chắc chắn muốn xóa những bản ghi đã chọn ?", (isConfirmed) => {
+            if (isConfirmed) {
+                const ids = this.selectedDataItems.map((m) => m.id);
+                this.crudServiceProxy.deleteMulti(ids).subscribe(() => {
+                    this.notify.success("Xóa thành công !");
+                    this.refresh();
+                });
+            }
+        });
+    }
+}

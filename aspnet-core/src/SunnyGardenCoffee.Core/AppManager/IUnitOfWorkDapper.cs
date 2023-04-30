@@ -1,0 +1,34 @@
+﻿using MicroOrm.Dapper.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
+
+namespace SunnyGardenCoffee.AppManager
+{
+    public interface IUnitOfWorkDapper : IDisposable
+    {
+        IDbTransaction DbTransaction { get; }
+        IDbConnection Connection { get; }
+        IDapperRepository<TEntity> DapperRepository<TEntity>() where TEntity : class, new();
+
+        Task<IEnumerable<dynamic>> QueryAsync(string query, object param = null, int? commandTimeout = null,
+            CommandType? commandType = CommandType.Text);
+
+        Task<IEnumerable<TK>> QueryAsync<TK>(string query, object param = null, int? commandTimeout = null,
+            CommandType? commandType = CommandType.Text);
+
+        Task<TK> QueryFirstAsync<TK>(string query, object param = null, int? commandTimeout = null,
+            CommandType? commandType = CommandType.Text);
+        Task<TK> QueryFirstOrDefaultAsync<TK>(string query, object param = null, int? commandTimeout = null,
+            CommandType? commandType = CommandType.Text);
+
+        Task<TK> QuerySingleAsync<TK>(string query, object param = null, int? commandTimeout = null,
+            CommandType? commandType = CommandType.Text);
+        Task<TK> QuerySingleOrDefaultAsync<TK>(string query, object param = null, int? commandTimeout = null,
+            CommandType? commandType = CommandType.Text);
+
+        Task<int> ExecuteAsync(string query, object param = null, bool buffered = true, int? commandTimeout = null,
+            CommandType? commandType = CommandType.Text);
+    }
+}

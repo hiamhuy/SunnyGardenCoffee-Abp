@@ -1,0 +1,98 @@
+<div class="layout_cusotm">
+    <div class="content_left">
+        <ul>
+            <li *ngFor="let tab of listMenu; index as idx">
+                <div
+                    class="li_content"
+                    (click)="selectTab(tab.code)"
+                    [ngClass]="tab.isActive == true ? 'active-content' : ''"
+                >
+                    <div class="icon"><i class="{{ tab.icon }}"></i></div>
+                    <div class="name">{{ tab.name }}</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="content_mid">
+        <div>
+            <mon-an-list
+                [categoryCode]="tabIndex"
+                [title]="title"
+                (thucDonOutput)="getDanhSachThucDon($event)"
+            ></mon-an-list>
+        </div>
+        <!-- <div [hidden]="tabIndex != 'LOAI-91778'">
+            <do-uong-list [categoryCode]="tabIndex" (thucDonOutput)="getDanhSachThucDon($event)"></do-uong-list>
+        </div> -->
+    </div>
+    <div class="content_right">
+        <div>
+            <div class="content_selected">
+                <div class="item" *ngFor="let _thucDon of hoaDon?.danhSachThucDonDto; index as idx">
+                    <div class="item_content">
+                        <div class="name_item">{{ _thucDon.thucDonName }}</div>
+                        <div class="price_item">
+                            {{ _thucDon.gia | currency : "VND" : "VNĐ" | splitVND : _thucDon.gia }}
+                        </div>
+                    </div>
+                    <div class="count_item">
+                        <div class="remove" (click)="removeThucDon(idx)"><i class="fas fa-times"></i></div>
+                        <div class="right mr-2">
+                            <input-up-down-number
+                                [value]="_thucDon.soLuong"
+                                (emitValueNumber)="amountItem($event, idx)"
+                            ></input-up-down-number>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content_price">
+                <div class="bill_type">
+                    <div nz-row>
+                        <div nz-col class="gutter-row" [nzXs]="12" [nzSm]="12">
+                            <nz-radio-group [(ngModel)]="hoaDon.kieuMua">
+                                <label nz-radio [nzValue]="BILLTYPE.MuaVe">Mua về</label>
+                                <label nz-radio [nzValue]="BILLTYPE.TaiQuan">Tại quán</label>
+                            </nz-radio-group>
+                        </div>
+                        <div nz-col class="gutter-row" [nzXs]="12" [nzSm]="12">
+                            <span [hidden]="hoaDon.tenBan == null || hoaDon.kieuMua != BILLTYPE.TaiQuan" class="mr-2">{{
+                                hoaDon.tenBan
+                            }}</span>
+                            <span [hidden]="hoaDon.kieuMua != BILLTYPE.TaiQuan"
+                                ><a (click)="chonBan()">Chọn bàn</a></span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content_pay">
+                <div nz-row>
+                    <div nz-col class="gutter-row d-flex justify-content-between p-2" [nzXs]="24" [nzSm]="24">
+                        <div class="into_money">TỔNG TIỀN:</div>
+                        <div class="into_money">
+                            {{
+                                hoaDon?.tongTien
+                                    ? (hoaDon?.tongTien | currency : "VND" : "VNĐ" | splitVND : hoaDon.tongTien)
+                                    : 0
+                            }}
+                        </div>
+                    </div>
+                    <div nz-col class="gutter-row" [nzXs]="24" [nzSm]="24">
+                        <button
+                            class="w-100"
+                            nz-button
+                            nzType="primary"
+                            (click)="thanhToan()"
+                            [disabled]="
+                                hoaDon?.danhSachThucDonDto?.length == 0 || hoaDon?.danhSachThucDonDto?.length == null
+                            "
+                        >
+                            THANH TOÁN
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

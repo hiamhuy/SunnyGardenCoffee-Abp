@@ -1,0 +1,14 @@
+<nz-input-group [nzSuffix]="suffixPrice">
+    <input
+        style="width: 100%"
+        type="number"
+        nz-input
+        placeholder="Nhập số tiền ..."
+        [(ngModel)]="value"
+        (ngModelChange)="valueOutput.emit($event)"
+        [disabled]="disabled"
+    />
+</nz-input-group>
+<ng-template #suffixPrice>
+    <span>VNĐ</span>
+</ng-template>

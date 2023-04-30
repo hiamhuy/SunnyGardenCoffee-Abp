@@ -1,0 +1,33 @@
+.container {
+    padding: 5px;
+}
+
+.box {
+    max-height: 130px;
+    .inner-box {
+        position: relative;
+        cursor: pointer;
+        .background_img {
+            width: fit-content;
+            height: fit-content;
+            img {
+                width: 145px;
+                height: 120px;
+                object-fit: contain;
+            }
+        }
+        .text {
+            position: absolute;
+            width: 100%;
+            font-size: 16px;
+            top: 0;
+            margin-left: 50px;
+            margin-top: 45px;
+            color: #fff;
+        }
+    }
+    .inner-box:hover {
+        background-color: rgba(165, 42, 42, 0.11);
+        border-radius: 5px;
+    }
+}

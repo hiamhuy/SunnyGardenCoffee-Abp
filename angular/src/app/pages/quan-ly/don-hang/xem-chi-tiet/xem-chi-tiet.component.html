@@ -1,0 +1,54 @@
+<div class="container">
+    <div nz-row>
+        <div nz-col class="gutter-row" [nzXs]="24" [nzSm]="24">
+            <img class="custom__img" src="../../../../assets/img/logo/logo.png" alt="" />
+            <div class="font__weight">Thời gian : {{ hoaDon.datePrint | date : "dd/MM/yyyy HH:mm" }}</div>
+            <div class="font__weight">Người bán : {{ hoaDon.nguoiBan }}</div>
+            <div *ngIf="hoaDon.type == BILLTYPE.TaiQuan" class="font__weight">Bàn : {{ hoaDon.tenBan }}</div>
+            <hr />
+        </div>
+        <div nz-col class="gutter-row" [nzXs]="24" [nzSm]="24">
+            <div *ngFor="let thucDon of hoaDon?.hoaDonChiTietDtos">
+                <div class="hoadon__ten">
+                    <span>{{ thucDon?.tenThucDon }}</span>
+                </div>
+                <div class="hoadon__gia flex_custom">
+                    <span>{{ thucDon.price | currency : "VND" : "VNĐ" | splitVND : thucDon.price }}</span>
+                    <span class="ml-2">x</span>
+                    <span>SL: {{ thucDon?.amount }}</span>
+                    <span class="ml-2">=</span>
+                    <span>{{
+                        thucDon?.price * thucDon?.amount
+                            | currency : "VND" : "VNĐ"
+                            | splitVND : thucDon?.price * thucDon?.amount
+                    }}</span>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div nz-col class="gutter-row mb-1" [nzXs]="24" [nzSm]="24">
+            <div class="hoadon__tongtien flex_custom">
+                <span>Tổng tiền :</span>
+                <span>{{ hoaDon.intoMoney | currency : "VND" : "VNĐ" | splitVND : hoaDon.intoMoney }}</span>
+            </div>
+        </div>
+        <div nz-col class="gutter-row mb-1" [nzXs]="24" [nzSm]="24">
+            <div class="flex_custom">
+                <span>Chiết khấu :</span>
+                <span>{{ hoaDon.discount }} %</span>
+            </div>
+        </div>
+        <div nz-col class="gutter-row mb-1" [nzXs]="24" [nzSm]="24">
+            <div class="flex_custom">
+                <span>Tiền khách đưa :</span>
+                <span>{{ hoaDon.moneyByCustomer | currency : "VND" : "VNĐ" | splitVND : hoaDon.moneyByCustomer }}</span>
+            </div>
+        </div>
+        <div nz-col class="gutter-row mb-1" [nzXs]="24" [nzSm]="24">
+            <div class="flex_custom">
+                <span>Tiền thừa :</span>
+                <span>{{ hoaDon.moneyBack | currency : "VND" : "VNĐ" | splitVND : hoaDon.moneyBack }}</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Sunny Garden Coffee App</title>
+        <base href="/" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
+        <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/icon/cup.png" />
+        <link rel="icon" type="image/png" href="./assets/img/icon/cup.png" />
+        <!--     Fonts and icons     -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet" />
+
+        <style type="text/css">
+            /* .preloader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                background: #9c9c9d;
+                z-index: 9999;
+                transition: opacity 0.65s;
+            }
+
+            [data-theme="dark"] .preloader {
+                background: #9c9c9d;
+            } */
+
+            /* .preloader-hidden-add {
+        opacity: 1 !important;
+        display: block !important;
+      }
+
+      .preloader-hidden-add-active {
+        opacity: 0 !important;
+      }
+
+      .preloader-hidden {
+        display: none !important;
+      } */
+
+            .loader-box {
+                background: #fff;
+                top: 50%;
+                left: 50%;
+                position: absolute;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+            }
+
+            .loading-wrapper {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+            }
+
+            .loading-wrapper .loader {
+                height: 80px;
+                width: 80px;
+                border: 3px solid #e5e5e5;
+                border-radius: 50%;
+                -webkit-animation: pulse1572 1200ms ease-in-out;
+                animation: pulse1572 1200ms ease-in-out;
+                -webkit-animation-iteration-count: infinite;
+                animation-iteration-count: infinite;
+            }
+
+            .loading-wrapper .loader .loader-inner {
+                display: block;
+                height: 40px;
+                width: 40px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -webkit-transform: translateX(-50%) translateY(-50%);
+                transform: translateX(-50%) translateY(-50%);
+                background: linear-gradient(180deg, rgb(0, 140, 255) 0%, rgb(218, 67, 218) 100%);
+                -webkit-transform-origin: 50% 50%;
+                transform-origin: 50% 50%;
+                border-radius: 50%;
+                -webkit-animation: innerPulse934 1200ms ease-in-out;
+                animation: innerPulse934 1200ms ease-in-out;
+                -webkit-animation-iteration-count: infinite;
+                animation-iteration-count: infinite;
+                -webkit-animation-delay: 600ms;
+                animation-delay: 600ms;
+                box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+            }
+
+            @keyframes pulse1572 {
+                0% {
+                    border: 3px solid #fff;
+                }
+
+                50% {
+                    border: 40px solid #fff;
+                }
+
+                100% {
+                    border: 3px solid #fff;
+                }
+            }
+
+            @keyframes innerPulse934 {
+                0% {
+                    height: 30px;
+                    width: 30px;
+                }
+
+                50% {
+                    height: 53.33333px;
+                    width: 53.33333px;
+                }
+
+                100% {
+                    height: 30px;
+                    width: 30px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- <div class="preloader">abc</div> -->
+        <app-root></app-root>
+    </body>
+</html>

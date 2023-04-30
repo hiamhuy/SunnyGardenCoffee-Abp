@@ -1,0 +1,73 @@
+﻿@using System.Globalization
+@using Abp.AspNetCore.Mvc.Caching
+@using Abp.CachedUniqueKeys
+@inject SunnyGardenCoffee.Timing.AppTimes AppTimes
+@inject ICachedUniqueKeyPerUser CachedUniqueKeyPerUser
+@inject IGetScriptsResponsePerUserConfiguration GetScriptsResponsePerUserConfiguration
+
+<environment names="Development">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js" integrity="sha512-nO7wgHUoWPYGCNriyGzcFwPSF+bPDOR+NvtOYy2wMcWkrnCNPKBcFEkU80XIN14UVja0Gdnff9EmydyLlOL7mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js" integrity="sha512-Rd5Gf5A6chsunOJte+gKWyECMqkG8MgBYD1u80LOOJBfl6ka9CtatRrD4P0P5Q5V/z/ecvOCSYC8tLoWNrCpPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap-affix.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js" integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js" integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    
+    <script type="text/javascript">
+        // This is used to get the application's root path from javascript.
+        // It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {};
+        abp.appPath = '@ApplicationPath';
+    </script>
+</environment>
+
+<environment names="Staging,Production">
+    <script src="~/view-resources/Views/_Bundles/shared-layout.min.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        // This is used to get the application's root path from javascript.
+        // It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {};
+        abp.appPath = '@ApplicationPath';
+    </script>
+</environment>
+
+@if (CultureInfo.CurrentUICulture.Name != "en")
+{
+   @* var normalizedCurrentUICultureName = CultureInfo.CurrentUICulture.Name.Replace("-", "_");
+    var localizationFileNameWithExtension = "messages_";
+    switch (normalizedCurrentUICultureName)
+    {
+        case "zh_Hans":
+            localizationFileNameWithExtension += "zh";
+            break;
+        case "es_MX":
+            localizationFileNameWithExtension += "es";
+            break;
+        default:
+            localizationFileNameWithExtension += normalizedCurrentUICultureName;
+            break;
+    }
+    localizationFileNameWithExtension += ".min.js";
+    <script src="~/libs/jquery-validate/localization/@localizationFileNameWithExtension" asp-append-version="true"></script>*@
+}
+
+<script type="text/javascript">
+        // Localizing momentjs
+        //moment.locale('@CultureInfo.CurrentUICulture.Name');
+</script>
+
+<!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
+<script src="~/AbpServiceProxies/GetAll?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+
+@if (GetScriptsResponsePerUserConfiguration.IsEnabled)
+{
+@*    <script src="@(ApplicationPath)AbpScripts/GetScripts?v=@(await CachedUniqueKeyPerUser.GetKeyAsync(GetScriptsResponsePerUserCache.CacheName))" type="text/javascript"></script>
+*@}
+else
+{
+@*    <script src="@(ApplicationPath)AbpScripts/GetScripts?v=@(AppTimes.StartupTime.Ticks)" type="text/javascript"></script>
+*@}

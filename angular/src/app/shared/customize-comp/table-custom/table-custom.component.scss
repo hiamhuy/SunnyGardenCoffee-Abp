@@ -1,0 +1,29 @@
+.div-pagination-simple {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.table-custom {
+    thead{
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    th {
+        background-color: darkslategrey !important;
+        font-weight: 600 !important;
+        color: rgb(235, 235, 235) !important;
+       
+    }
+
+    .list-icon-status {
+        border-radius: 25px;
+        width: 20px;
+        height: 20px;
+        padding: 0px;
+        margin-left: 6px;
+
+        i {
+            padding: 3px;
+        }
+    }
+}

@@ -1,0 +1,92 @@
+<div [@routerTransition]>
+    <layout-page-list-custom>
+        <ng-container filterBox>
+            <filter-spin
+                (onSearch)="refresh()"
+                (onRefresh)="clear()"
+                (keydown.enter)="refresh()"
+                [isTypeButtonSearch]="true"
+                [isShowTitleSearch]="true"
+            >
+                <!-- <ng-container advancedSearch>
+        <div nz-col nzXs="24" nzMd="11" nzLg="6" class="gutter-row">
+            <ora-range-date-picker
+                titleFromDate="Từ ngày"
+                titleEndDate="Đến ngày"
+                [(startDateRange)]="searchDto.fromDate"
+                [(endDateRange)]="searchDto.toDate"
+            >
+            </ora-range-date-picker>
+        </div>
+    </ng-container> -->
+                <input
+                    nz-input
+                    type="text"
+                    class="txtSearchCustom"
+                    [(ngModel)]="searchDto.filter"
+                    placeholder="Nhập từ khóa để tìm kiếm..."
+                />
+            </filter-spin>
+        </ng-container>
+        <ng-container pageAction>
+            <div class="mt-3">
+                <button nz-button nzType="primary" (click)="createOrEdit()">
+                    <i class="fas fa-user-plus"></i><span class="ml-1">Thêm mới</span>
+                </button>
+            </div>
+        </ng-container>
+        <ng-container tableList>
+            <nz-card class="card-custom">
+                <table-custom
+                    #datatable
+                    [rows]="dataList"
+                    [isLoading]="isTableLoading"
+                    [totalRows]="totalItems"
+                    [(pageSize)]="pageSize"
+                    [(page)]="pageNumber"
+                    (pageSizeChange)="refresh()"
+                    (pageChange)="pageNumberChange()"
+                    (sortChange)="gridSort($event)"
+                    [(selectedDataItems)]="selectedDataItems"
+                    bordered="false"
+                    [scroll]="{ x: '600px' }"
+                    [isMulti]="true"
+                >
+                    <ng-container actionTable *ngIf="selectedDataItems && selectedDataItems.length > 0">
+                        <button
+                            nz-button
+                            nzType="primary"
+                            class="mr-2"
+                            nzGhost
+                            title="Xóa nhiều"
+                            (click)="multiDelete()"
+                        >
+                            Xóa nhiều
+                        </button>
+                    </ng-container>
+
+                    <table-column dataType="Select" width="50"></table-column>
+                    <table-column key="codeTable" header="Mã bàn" width="150"></table-column>
+                    <table-column key="nameTable" header="Tên bàn"></table-column>
+                    <table-column header="" width="50" headerAlign="center" contentAlign="center" fixRight="true">
+                        <ng-template tableCell let-data>
+                            <button style="border: none !important" nz-button nz-dropdown [nzDropdownMenu]="menu4">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <nz-dropdown-menu #menu4="nzDropdownMenu">
+                                <ul nz-menu>
+                                    <li nz-menu-item>
+                                        <a (click)="createOrEdit(data)"> <i class="fas fa-edit"></i> Sửa </a>
+                                    </li>
+                                    <li nz-menu-item>
+                                        <a (click)="delete(data)"> <i class="fas fa-trash-alt"></i> Xóa </a>
+                                    </li>
+                                </ul>
+                            </nz-dropdown-menu>
+                        </ng-template>
+                    </table-column>
+                </table-custom>
+            </nz-card>
+        </ng-container>
+    </layout-page-list-custom>
+</div>

@@ -1,0 +1,28 @@
+
+.ora-user-paging-list-custom {
+    display: inline-block;
+    height: 30px;
+
+    .item-previous-page,
+    .item-next-page {
+      color: #fcb815;
+      padding: 3px 8px;
+      float: left;
+    }
+
+    .item-page {
+      background: #EDEDED;
+      border-radius: 8px;
+      width: 30px;
+      margin: 0px 2px;
+      padding: 5px;
+      text-align: center;
+      color: #343B4B;
+      float: left;
+    }
+
+    .item-page-active {
+      background: #fcb815;
+      color: #fff;
+    }
+  }

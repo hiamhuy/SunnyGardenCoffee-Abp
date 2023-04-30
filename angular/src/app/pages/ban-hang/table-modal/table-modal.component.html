@@ -1,0 +1,20 @@
+<div class="container">
+    <div nz-row>
+        <div
+            nz-col
+            class="gutter-row box"
+            [nzXs]="12"
+            [nzSm]="8"
+            [nzMd]="6"
+            [nzXl]="4"
+            *ngFor="let table of dataList; index as idx"
+        >
+            <div class="inner-box" (click)="outPutData(table)">
+                <div class="background_img">
+                    <img src="../../../../assets/img/icon/ban.png" alt="" />
+                </div>
+                <div class="text">{{ table.nameTable }}</div>
+            </div>
+        </div>
+    </div>
+</div>

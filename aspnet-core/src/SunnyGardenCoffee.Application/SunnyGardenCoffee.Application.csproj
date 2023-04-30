@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <VersionPrefix>1.0.0.0</VersionPrefix>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>SunnyGardenCoffee.Application</AssemblyName>
+    <PackageId>SunnyGardenCoffee.Application</PackageId>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace>SunnyGardenCoffee</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="AppCore\QuanLy\QuanLyDonHang\QuanLyDonHangAppServices.cs~RF1d03ce8.TMP" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Abp.AspNetCore.SignalR" Version="7.3.0" />
+    <PackageReference Include="Abp.EntityFrameworkCore" Version="7.3.0" />
+    <PackageReference Include="Abp.EntityFrameworkCore.EFPlus" Version="7.3.0" />
+    <PackageReference Include="MediatR" Version="8.0.2" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.4" />
+    <PackageReference Include="ReportViewerCore.NETCore" Version="15.1.17" />
+    <PackageReference Include="SqlKata" Version="2.2.0" />
+    <PackageReference Include="SqlKata.Execution" Version="2.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SunnyGardenCoffee.Core\SunnyGardenCoffee.Core.csproj" />
+  </ItemGroup>
+</Project>

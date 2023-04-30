@@ -1,0 +1,69 @@
+<div [@routerTransition]>
+    <div class="p-3">
+        <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row mt-3" [nzXs]="24" [nzMd]="8">
+                <div class="inner-box">
+                    <div class="mb-3">
+                        <span class="icon color-do"><i class="fas fa-file-invoice-dollar"></i> </span
+                        ><span class="text_title">Số đơn/ tháng</span>
+                    </div>
+                    <div class="value">{{ data.soDonHang ? data.soDonHang : 0 }}</div>
+                </div>
+            </div>
+            <div nz-col class="gutter-row mt-3" [nzXs]="24" [nzMd]="8">
+                <div class="inner-box">
+                    <div class="mb-3">
+                        <span class="icon color-xanh"><i class="fas fa-coins"></i></span>
+                        <span class="text_title">Dòng tiền ra</span>
+                    </div>
+
+                    <div class="value">
+                        {{
+                            data.dongTienRa
+                                ? (data.dongTienRa | currency : "VND" : "VNĐ" | splitVND : data.dongTienRa)
+                                : "0 VNĐ"
+                        }}
+                    </div>
+                </div>
+            </div>
+            <div nz-col class="gutter-row mt-3" [nzXs]="24" [nzMd]="8">
+                <div class="inner-box">
+                    <div class="mb-3">
+                        <span class="icon color-vang"><i class="fas fa-coins"></i></span>
+                        <span class="text_title">Dòng tiền vào</span>
+                    </div>
+                    <div class="value">
+                        {{
+                            data.dongTienVao
+                                ? (data.dongTienVao | currency : "VND" : "VNĐ" | splitVND : data.dongTienVao)
+                                : "0 VNĐ"
+                        }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div nz-row [nzGutter]="16">
+            <div nz-col class="gutter-row mt-3" [nzXs]="24" [nzMd]="16">
+                <div class="inner-box">
+                    <div class="p-3 text">Biểu đồ dòng tiền</div>
+                    <div id="chartdiv" style="width: 100%; min-height: 500px"></div>
+                </div>
+            </div>
+            <div nz-col class="gutter-row mt-3" [nzXs]="24" [nzMd]="8">
+                <div class="inner-box m-h-500 p-3">
+                    <div class="p-3 text">Đồ uống được bán chạy nhất</div>
+                    <div class="content_buy mt-2" *ngFor="let item of thucDonHot; index as idx">
+                        <div class="item">
+                            <div class="item__img">
+                                <img [src]="duongDanAnh + item.hinhAnh" alt="" />
+                            </div>
+                            <div class="item__container">
+                                <span class="item__text">{{ item.tenMon }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div nz-row>
+    <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+        <div class="img_thucdon">
+            <img [src]="duongDanAnh" />
+        </div>
+    </div>
+    <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+        <div class="input_file">
+            <input
+                #imgSrc
+                type="file"
+                id="imgSrc"
+                (change)="uploadPhoto($event)"
+                accept="image/*"
+                class="custom_typeFile"
+            />
+            <label for="imgSrc"
+                ><i class="fas fa-upload"></i><span class="ml-2">{{ labelVal }}</span></label
+            >
+        </div>
+    </div>
+</div>

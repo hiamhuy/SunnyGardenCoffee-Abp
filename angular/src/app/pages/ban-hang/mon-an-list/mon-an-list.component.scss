@@ -1,0 +1,110 @@
+.box-search {
+    height: 45px;
+    padding: 5px;
+    .text_list {
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: auto;
+            white-space: nowrap;
+            padding-bottom: 13px;
+        }
+        h2:before {
+            background-color: darkslategrey;
+            content: "";
+            display: block;
+            height: 3px;
+            width: 75px;
+            margin-bottom: 5px;
+        }
+    }
+
+    .container-input {
+        position: relative;
+    }
+
+    .input {
+        width: 150px;
+        padding: 4px 0px 4px 40px;
+        border-radius: 9999px;
+        border: solid 1px darkslategrey;
+        transition: all 0.2s ease-in-out;
+        outline: none;
+        opacity: 0.8;
+    }
+
+    .container-input svg {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translate(0, -50%);
+    }
+
+    .input:focus {
+        opacity: 1;
+        width: 250px;
+    }
+}
+.right {
+    float: right;
+    right: 0;
+}
+
+.box {
+    // width: 70px;
+    height: 190px;
+    border: 1px solid #b6b5b5d6;
+    .inner-box {
+        position: relative;
+        cursor: pointer;
+        .img_custom {
+            img {
+                object-fit: cover;
+                height: 190px;
+                width: 100%;
+            }
+        }
+        .overlay {
+            position: absolute;
+            background: #3333339c;
+            height: 50px;
+            width: 100%;
+            font-size: 15px;
+            color: #fff;
+            bottom: 0;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            .text {
+                text-align: center;
+                word-wrap: break-word;
+            }
+        }
+    }
+    .inner-box:hover {
+        .img_custom {
+            img {
+                opacity: 0.7;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 767.9px) {
+    .box-search {
+        .text_list {
+            h2 {
+                font-size: 14px !important;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 360px) {
+    .box-search {
+        .text_list {
+            h2 {
+                font-size: 12px !important;
+            }
+        }
+    }
+}

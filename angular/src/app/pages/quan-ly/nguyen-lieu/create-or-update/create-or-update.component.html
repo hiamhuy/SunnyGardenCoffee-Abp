@@ -1,0 +1,65 @@
+<div class="modal-body">
+    <div nz-row>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Mã hóa đơn</label> <span style="color: red">*</span>
+            <div>
+                <input
+                    nz-input
+                    required
+                    [(ngModel)]="dataItem.receiptNumber"
+                    #receiptNumberModel="ngModel"
+                    #receiptNumberEl
+                />
+                <abp-validation-summary
+                    [control]="receiptNumberModel"
+                    [controlEl]="receiptNumberEl"
+                ></abp-validation-summary>
+            </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Ngày nhập hóa đơn</label> <span style="color: red">*</span>
+            <div>
+                <input-date-picker [(ngModel)]="dataItem.dateAdded"></input-date-picker>
+            </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Ghi chú</label>
+            <div>
+                <textarea nz-input rows="4" [(ngModel)]="dataItem.note"></textarea>
+            </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Danh sách hàng nhập</label>
+            <div>
+                <nz-table #data [nzData]="dataItem?.bienLaiNhapChiTietDtos" [nzShowPagination]="false">
+                    <thead>
+                        <tr>
+                            <th>Tên</th>
+                            <th style="width: 200px">Số lượng (đơn vị)</th>
+                            <th style="width: 150px">Giá nhập</th>
+                            <th style="width: 100px"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dt of dataItem?.bienLaiNhapChiTietDtos; index as idx">
+                            <td>{{ dt.name }}</td>
+                            <td>{{ dt.amount }}</td>
+                            <td>{{ dt.entryPrice | currency : "VND" : "VNĐ" | splitVND : dt.entryPrice }}</td>
+                            <td>
+                                <a (click)="update(dt, idx)" class="mr-2"><i class="far fa-edit"></i></a>
+                                <a (click)="delete(dt, idx)" style="color: red"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        <a (click)="create()"><i class="fas fa-plus-circle mr-2"></i> Thêm mới</a>
+                    </tbody>
+                </nz-table>
+            </div>
+        </div>
+    </div>
+    <div *nzModalFooter>
+        <button nz-button nzType="primary" (click)="save()">
+            {{ titleButton }}
+        </button>
+        <button nz-button nzType="default" (click)="close()">Hủy</button>
+    </div>
+</div>

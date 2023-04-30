@@ -1,0 +1,56 @@
+.filterBox-custom {
+  .gutter-row,
+  .ant-form-item-control {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+}
+.ant-btn + .ant-btn {
+    margin-left: -2px;
+}
+
+.txt-button-search button {
+    border-radius: unset;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
+}
+
+.txtSearchCustom{
+    border-radius: 8px !important;
+    border: 1px solid #95a5a6 !important;
+    color:#0f1318;
+}
+.filterBox-custom .ant-select:not(.ant-select-customize-input) .ant-select-selector{
+    border: 1px solid #95a5a6 !important;
+}
+
+.custom-ft-search{
+    .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child{
+        left: 10px !important;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .action-control{
+        margin-left: 8px !important;
+        overflow: hidden;
+        //margin-top: 16px !important;
+        .btn-filter{
+            .hide-text{
+                display:none;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1050px) {
+    .reponsive-button{
+        margin-left: 8px !important;
+        overflow: hidden;
+        //margin-top: 16px !important;
+        .btn-filter{
+            .hide-text{
+                display:none;
+            }
+        }
+    }
+}

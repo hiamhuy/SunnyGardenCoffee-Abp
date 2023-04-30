@@ -1,0 +1,88 @@
+﻿<div class="modal-body">
+    <nz-tabset>
+        <nz-tab nzTitle="Chi tiết người dùng">
+            <div nz-row>
+                <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+                    <label>Tên </label> <span style="color: red">*</span>
+                    <div>
+                        <input nz-input required maxlength="32" [(ngModel)]="user.name" #nameModel="ngModel" #nameEl />
+                        <abp-validation-summary [control]="nameModel" [controlEl]="nameEl"></abp-validation-summary>
+                    </div>
+                </div>
+                <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+                    <label>Họ </label> <span style="color: red">*</span>
+                    <div>
+                        <input
+                            nz-input
+                            required
+                            maxlength="32"
+                            [(ngModel)]="user.surname"
+                            #surnameModel="ngModel"
+                            #surnameEl
+                        />
+                        <abp-validation-summary
+                            [control]="surnameModel"
+                            [controlEl]="surnameEl"
+                        ></abp-validation-summary>
+                    </div>
+                </div>
+                <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+                    <label>Tên đăng nhập </label> <span style="color: red">*</span>
+                    <div>
+                        <input
+                            nz-input
+                            required
+                            minlength="2"
+                            maxlength="32"
+                            [(ngModel)]="user.userName"
+                            #userNameModel="ngModel"
+                            #userNameEl
+                        />
+                        <abp-validation-summary
+                            [control]="userNameModel"
+                            [controlEl]="userNameEl"
+                        ></abp-validation-summary>
+                    </div>
+                </div>
+                <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+                    <label>Email </label> <span style="color: red">*</span>
+                    <div>
+                        <input
+                            type="email"
+                            nz-input
+                            required
+                            maxlength="256"
+                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+                            [(ngModel)]="user.emailAddress"
+                            #emailAddressModel="ngModel"
+                            #emailAddressEl
+                        />
+                        <abp-validation-summary
+                            [control]="emailAddressModel"
+                            [controlEl]="emailAddressEl"
+                        ></abp-validation-summary>
+                    </div>
+                </div>
+                <div nz-col class="gutter-row mt-2" [nzSm]="24" [nzXs]="24">
+                    <label nz-checkbox [(ngModel)]="user.isActive">Kích hoạt</label>
+                </div>
+            </div>
+        </nz-tab>
+        <nz-tab nzTitle="Vai trò">
+            <div class="d-flex flex-column">
+                <ng-container *ngFor="let role of roles; index as i">
+                    <label
+                        nz-checkbox
+                        [ngModel]="isRoleChecked(role.normalizedName)"
+                        (ngModelChange)="onRoleChange(role, $event)"
+                        >{{ role.name }}</label
+                    >
+                </ng-container>
+            </div>
+        </nz-tab>
+    </nz-tabset>
+</div>
+<div *nzModalFooter>
+    <button nz-button nzType="primary" (click)="save()">Chỉnh sửa</button>
+    <button nz-button nzType="default" (click)="close()">Hủy</button>
+</div>

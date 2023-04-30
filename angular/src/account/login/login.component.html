@@ -1,0 +1,52 @@
+﻿<h4 class="text-center mb-3">
+    Đăng nhập</h4>
+<form novalidate autocomplete="off" #loginForm="ngForm" (ngSubmit)="login()" method="post" role="form">
+    <div class="form-group">
+        <div class="input-group">
+            <input nz-input class="form-control" name="userNameOrEmailAddress" [(ngModel)]="authService.authenticateModel.userNameOrEmailAddress" [placeholder]="'Tài khoản' | localize" required maxlength="256" #userNameOrEmailAddressModel="ngModel" #userNameOrEmailAddressEl
+            />
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>
+        <abp-validation-summary [control]="userNameOrEmailAddressModel" [controlEl]="userNameOrEmailAddressEl"></abp-validation-summary>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <input nz-input type="password" class="form-control" name="password" [(ngModel)]="authService.authenticateModel.password" [placeholder]="'Mật khẩu'" required maxlength="32" #passwordModel="ngModel" #passwordEl />
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                </div>
+            </div>
+        </div>
+        <abp-validation-summary [control]="passwordModel" [controlEl]="passwordEl"></abp-validation-summary>
+    </div>
+    <div nz-row [nzGutter]="[16, 24]">
+        <!-- <div nz-col class="gutter-row" [nzXs]="24" [nzLg]="24">
+            <label nz-checkbox [(ngModel)]="authService.rememberMe" name="rememberMe" id="rememberme">
+                    <span>Ghi nhớ tài khoản </span>
+                </label>
+        </div> -->
+        <div nz-col class="gutter-row" [nzXs]="24" [nzLg]="24">
+            <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.form.valid || submitting">
+                    <!-- {{ "LogIn" | localize }} -->
+                    Đăng nhập
+                  </button>
+        </div>
+    </div>
+    <!-- <div nz-row [nzGutter]="[16, 24]">
+        <div nz-col class="gutter-row" [nzXs]="24" [nzLg]="24">
+            <div class="d-flex flex-row">
+                <div>Bạn chưa có tài khoản? </div>
+                <div class="ml-2">
+                    <a *ngIf="isSelfRegistrationAllowed" [routerLink]="['../register']">
+                        Đăng ký
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</form>

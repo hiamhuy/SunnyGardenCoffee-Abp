@@ -1,0 +1,14 @@
+<div class="ora-user-paging-list-custom">
+  <a title="Trang trước" class="item-previous-page" (click)="changePaging(page == 1 ? 1 : page - 1)">
+    <i nz-icon nzType="left" nzTheme="outline"></i>
+  </a>
+  <a
+    class="item-page {{ this.page == item ? 'item-page-active' : '' }}"
+    *ngFor="let item of arrPaging"
+    (click)="changePaging(item)"
+    >{{ item }}</a
+  >
+  <a title="Trang sau" class="item-next-page" (click)="changePaging(page == totalPage ? page : page + 1)">
+    <i nz-icon nzType="right" nzTheme="outline"></i>
+  </a>
+</div>

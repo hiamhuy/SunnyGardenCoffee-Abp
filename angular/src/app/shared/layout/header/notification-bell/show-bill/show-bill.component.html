@@ -1,0 +1,61 @@
+<div class="container">
+    <div nz-row>
+        <div nz-col class="gutter-row" [nzXs]="24" [nzSm]="24">
+            <img class="custom__img" src="../../../../assets/img/logo/logo.png" alt="" />
+            <div class="font__weight">Khách hàng : {{ data.phoneNumber }}</div>
+            <div class="font__weight">Địa chỉ đặt : {{ data.deliveryAddress }}</div>
+            <div class="font__weight">Ngày đặt : {{ data.bookingDate | date : "dd/MM/yyyy HH:mm" }}</div>
+            <hr />
+        </div>
+        <div nz-col class="gutter-row" [nzXs]="24" [nzSm]="24">
+            <div *ngFor="let ds of data?.danhSachOrder">
+                <div class="hoadon__ten">
+                    <span>{{ ds?.tenThucDon }}</span>
+                </div>
+                <div class="hoadon__gia flex_custom">
+                    <span>{{ ds.price | currency : "VND" : "VNĐ" | splitVND : ds.price }}</span>
+                    <span class="ml-2">x</span>
+                    <span>SL: {{ ds?.amount }}</span>
+                    <span class="ml-2">=</span>
+                    <span>{{
+                        ds?.price * ds?.amount | currency : "VND" : "VNĐ" | splitVND : ds?.price * ds?.amount
+                    }}</span>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div nz-col class="gutter-row mb-1" [nzXs]="24" [nzSm]="24">
+            <div class="hoadon__tongtien flex_custom">
+                <span>Tổng tiền :</span>
+                <span>{{ data.tongTien | currency : "VND" : "VNĐ" | splitVND : data.tongTien }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div *nzModalFooter>
+    <div
+        class="d-flex justify-content-center aglin-center"
+        *ngIf="data.status == TrangThaiMuaHang.DaGiaoHang || data.status == TrangThaiMuaHang.TuTroi"
+    >
+        Đơn hàng đã được xử lý
+    </div>
+    <button
+        nz-button
+        nzType="primary"
+        (click)="xacNhan()"
+        *ngIf="data.status == TrangThaiMuaHang.DaDat"
+        [disabled]="isView"
+    >
+        Xác nhận
+    </button>
+    <button
+        nz-button
+        nzType="default"
+        nzDanger
+        (click)="tuTroi()"
+        *ngIf="data.status == TrangThaiMuaHang.DaDat"
+        [disabled]="isView"
+    >
+        Từ trối
+    </button>
+</div>

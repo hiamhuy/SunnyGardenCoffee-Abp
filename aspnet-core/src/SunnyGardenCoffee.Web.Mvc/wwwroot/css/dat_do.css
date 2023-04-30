@@ -1,0 +1,372 @@
+﻿.order__food {
+    background: #0000007e;
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: all .3s ease-in;
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+    .order__food .order__container {
+        max-width: 300px;
+        width: 300px;
+        min-height: 500px;
+        background: #fff;
+        margin: 0 auto;
+        margin-top: 100px;
+    }
+
+        .order__food .order__container .order__button {
+            width: 100%;
+        }
+
+            .order__food .order__container .order__button .button_close {
+                position: relative;
+                width: 30px;
+                height: 30px;
+                color: black;
+                right: 0;
+                float: right;
+                top: 10px;
+                cursor: pointer;
+            }
+
+        .order__food .order__container .button_close i {
+            font-size: 20px;
+        }
+
+            .order__food .order__container .button_close i:hover {
+                color: red;
+            }
+
+        .order__food .order__container .order__content {
+            padding: 40px 10px 0;
+            top: 20px;
+        }
+
+            .order__food .order__container .order__content .order__item .order__title {
+                color: black;
+            }
+
+            .order__food .order__container .order__content .order__item .order__input input {
+                width: 100%;
+            }
+
+            .order__food .order__container .order__content .menu__items {
+                margin-top: 10px;
+                max-height: 300px;
+                height: 300px;
+                width: 100%;
+                border-top: 1px solid #80808047;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+                .order__food .order__container .order__content .menu__items .item {
+                    padding: 10px 0px;
+                    border-bottom: 1px solid #80808021;
+                    display: flex;
+                    flex-direction: row;
+                }
+
+                    .order__food .order__container .order__content .menu__items .item img {
+                        width: 60px;
+                        height: 60px;
+                    }
+
+                    .order__food .order__container .order__content .menu__items .item .info__item {
+                        display: inline-flex;
+                        flex-direction: column;
+                        margin-left: 10px;
+                        width: 100%;
+                    }
+
+                    .order__food .order__container .order__content .menu__items .item .name__item {
+                        color: black;
+                        font-size: 14px;
+                        font-weight: 400;
+                        margin-bottom: 15px;
+                    }
+
+                    .order__food .order__container .order__content .menu__items .item .box__item {
+                        display: inline-flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                    }
+
+                        .order__food .order__container .order__content .menu__items .item .box__item .price__item {
+                            color: red;
+                            font-size: 15px;
+                            font-weight: 400;
+                        }
+
+                        .order__food .order__container .order__content .menu__items .item .box__item .buy__item {
+                            width: 20px;
+                            height: 20px;
+                            background: red;
+                            color: #fff;
+                            border-radius: 3px;
+                            text-align: center;
+                            display: inline-flex;
+                            justify-content: center;
+                            align-items: center;
+                            cursor: pointer;
+                        }
+
+                            .order__food .order__container .order__content .menu__items .item .box__item .buy__item i {
+                                font-size: 13px;
+                            }
+
+        .order__food .order__container .order__foot {
+            width: 100%;
+            height: 35px;
+            display: flex;
+            flex-direction: row;
+            border-top: 1px solid #80808047;
+        }
+
+            .order__food .order__container .order__foot .cart {
+                width: 48%;
+                height: 35px;
+            }
+
+                .order__food .order__container .order__foot .cart .cart_container {
+                    width: 45px;
+                    height: 35px;
+                    display: flex;
+                    flex-direction: row;
+                    cursor: pointer;
+                }
+
+                    .order__food .order__container .order__foot .cart .cart_container i {
+                        color: orangered;
+                        font-size: 20px;
+                        margin-top: 5px;
+                    }
+
+                .order__food .order__container .order__foot .cart .count__item {
+                    background: orangered;
+                    font-size: 13px;
+                    display: inline-flex;
+                    justify-content: center;
+                    text-align: center;
+                    align-items: center;
+                    width: 18px;
+                    height: 18px;
+                    border-radius: 50%;
+                    margin-top: 6px;
+                    margin-left: 1px;
+                    cursor: default;
+                }
+
+            .order__food .order__container .order__foot .foot_container {
+                width: 52%;
+                height: 35px;
+                float: right;
+                right: 0;
+                display: flex;
+                flex-direction: row;
+                justify-content: end;
+            }
+
+                .order__food .order__container .order__foot .foot_container .total__price {
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: orangered;
+                    padding: 5px;
+                }
+
+                .order__food .order__container .order__foot .foot_container .ship__item button {
+                    font-size: 13px;
+                    font-weight: 500;
+                    width: 100%;
+                    background: orangered;
+                    border: none;
+                    color: #fff;
+                    padding: 6px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                }
+
+        .order__food .order__container .foot__modal {
+            color: black;
+            font-size: 13px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            margin-top: 15px;
+        }
+        /*cart__order*/
+        .order__food .order__container .content__modal {
+            position: relative;
+        }
+        .order__food .order__container .content__modal .cart__order {
+            display: none;
+            position: relative;
+            background: #fff;
+            padding: 10px;
+            height: 452.4px;
+            max-height: 452.4px;
+            margin: 0 auto;
+        }
+
+            .order__food .order__container .content__modal .cart__order .header__cart {
+                color: black;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #80808047;
+                margin-bottom: 10px;
+            }
+
+                .order__food .order__container .content__modal .cart__order .header__cart .delete {
+                    color: red;
+                    cursor: pointer;
+                }
+
+                .order__food .order__container .content__modal .cart__order .header__cart .title {
+                    color: black;
+                    cursor: default;
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+
+                .order__food .order__container .content__modal .cart__order .header__cart .close__cart {
+                    width: 30px;
+                    height: 30px;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                    align-items: center;
+                }
+
+                    .order__food .order__container .content__modal .cart__order .header__cart .close__cart i {
+                        font-size: 20px;
+                    }
+
+                    .order__food .order__container .content__modal .cart__order .header__cart .close__cart:hover {
+                        color: red;
+                    }
+
+            .order__food .order__container .content__modal .cart__order .menu__items {
+                max-height: 390px;
+                height: 390px;
+                width: 100%;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+
+                .order__food .order__container .content__modal .cart__order .menu__items .item {
+                    display: flex;
+                    flex-direction: row;
+                    padding: 10px 0px;
+                    border-bottom: 1px solid #80808021;
+                }
+
+                    .order__food .order__container .content__modal .cart__order .menu__items .item .info__item {
+                        display: inline-flex;
+                        flex-direction: column;
+                        margin-left: 10px;
+                        width: 100%;
+                    }
+
+                        .order__food .order__container .content__modal .cart__order .menu__items .item .info__item .name__item {
+                            color: black;
+                            font-size: 14px;
+                            font-weight: 400;
+                            margin-bottom: 15px;
+                        }
+
+                        .order__food .order__container .content__modal .cart__order .menu__items .item .info__item .box__item {
+                            display: inline-flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                        }
+
+                            .order__food .order__container .content__modal .cart__order .menu__items .item .info__item .box__item .price__item {
+                                color: red;
+                                font-size: 15px;
+                                font-weight: 400;
+                            }
+
+                            .order__food .order__container .content__modal .cart__order .menu__items .item .info__item .box__item .buy__item {
+                                color: black;
+                                cursor: default;
+                            }
+
+                                .order__food .order__container .content__modal .cart__order .menu__items .item .info__item .box__item .buy__item .remove_item {
+                                    color: red;
+                                    cursor: pointer;
+                                }
+
+
+    .order__food .cart__order .menu__items .item img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .order__food.order__open {
+        transition: all .3s ease-in;
+        transform: translateY(0%);
+        opacity: 1;
+    }
+
+.isHidden {
+    display: none !important;
+}
+
+.isActive {
+    display: block !important;
+}
+
+.order_modal_content {
+    height: 452.4px;
+    max-height: 452.4px;
+}
+
+
+@media screen and (min-width: 992px) {
+    .order__food .order__container {
+        max-width: 600px;
+        width: 600px;
+        min-height: 500px;
+    }
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+.menu__items {
+    scrollbar-width: auto;
+    scrollbar-color: #1b5f45 #ffffff;
+}
+
+    /* Chrome, Edge, and Safari */
+    .menu__items::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .menu__items::-webkit-scrollbar-track {
+        background: #ffffff;
+    }
+
+    .menu__items::-webkit-scrollbar-thumb {
+        background-color: #1b5f45;
+        border-radius: 9px;
+        border: 3px solid #ffffff;
+    }
+
+
+.error{
+    color:red;
+}

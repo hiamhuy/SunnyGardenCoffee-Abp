@@ -1,0 +1,39 @@
+﻿:root {
+    --grey: #3f3d56;
+    --green: #54b192;
+    --smooth: all .3s ease-in;
+    --backgroundIndex: #343a40;
+}
+.navbar__links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: var(--backgroundIndex);
+    z-index: 5;
+    transition: var(--smooth);
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+    .navbar__links .navbar-nav {
+        padding: 20px;
+    }
+
+        .navbar__links .navbar-nav .nav-item {
+            padding: 10px;
+        }
+
+    .navbar__links.navbar__open {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+        transition: var(--smooth);
+    }
+
+@media screen and (min-width: 992px) {
+    .navbar__links {
+       display:none;
+    }
+
+}

@@ -1,0 +1,91 @@
+<div class="filterBox-custom">
+    <ng-content select="[searchMain]"></ng-content>
+    <div nz-row nzGutter="8">
+        <ng-content select="[advancedSearch]" *ngIf="showAdvancedSearch === true"></ng-content>
+    </div>
+    <div nz-row nzGutter="8">
+        <ng-content select="[colLeftSearch]"></ng-content>
+        <div nz-col nzXs="24" nzMd="12" nzLg="12" class="gutter-row ml-2" [nzSpan]="4" *ngIf="!isTypeButtonSearch">
+            <nz-form-control></nz-form-control>
+            <nz-form-control>
+                <div class="reponsive-button">
+                    <button
+                        class="mr-3 btn-filter"
+                        nz-button
+                        style="background-color: #008676; color: #fff; border: none"
+                        (click)="search()"
+                        title="Tìm kiếm"
+                    >
+                        <i nz-icon nzType="search" nzTheme="outline"></i>
+                        <span class="hide-text">Tìm kiếm</span>
+                    </button>
+                    <button
+                        class="mr-3 btn-filter"
+                        style="background-color: #3ba15b; color: #fff; border: none"
+                        nz-button
+                        nzType="default"
+                        (click)="refresh()"
+                        title="Làm mới"
+                    >
+                        <i nz-icon nzType="sync" nzTheme="outline"></i>
+                        <span class="hide-text">Làm mới</span>
+                    </button>
+                </div>
+            </nz-form-control>
+        </div>
+
+        <div
+            class="mt-3 mb-3 custom-ft-search"
+            nz-col
+            nzXs="24"
+            nzMd="{{ isOnlySearch ? 24 : widthColSearch }}"
+            *ngIf="isTypeButtonSearch"
+        >
+            <nz-form-label *ngIf="isShowTitleSearch">{{ titleInputSearch }}</nz-form-label>
+
+            <nz-form-control>
+                <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                    <ng-content select=".txtSearchCustom"></ng-content>
+                </nz-input-group>
+            </nz-form-control>
+
+            <ng-template #suffixIconButton>
+                <div class="action-control">
+                    <button
+                        class="mr-3 btn-filter"
+                        nz-button
+                        style="background-color: #008676; color: #fff; border: none"
+                        (click)="search()"
+                        title="Tìm kiếm"
+                    >
+                        <i class="fas fa-search"></i>
+                        <span class="hide-text ml-1">Tìm kiếm</span>
+                    </button>
+                    <button
+                        class="mr-3 btn-filter"
+                        style="background-color: #3ba15b; color: #fff; border: none"
+                        nz-button
+                        nzType="default"
+                        (click)="refresh()"
+                        title="Làm mới"
+                    >
+                        <i class="fas fa-sync"></i>
+                        <span class="hide-text ml-1">Làm mới</span>
+                    </button>
+                    <!-- <button
+                      class="btn-filter"
+                      *ngIf="showButtonExpand == true"
+                      nz-button
+                      style="background-color: #b6a999; color: #fff; border: none"
+                      title="Tìm kiếm nâng cao"
+                      (click)="clickShowHideAdvancedSearch()"
+                    >
+                      <i class="fas fa-expand-alt"></i>
+                      <span class="hide-text ml-1">Mở rộng</span>
+                    </button> -->
+                </div>
+            </ng-template>
+        </div>
+        <ng-content select="[colRightSearch]"></ng-content>
+    </div>
+</div>

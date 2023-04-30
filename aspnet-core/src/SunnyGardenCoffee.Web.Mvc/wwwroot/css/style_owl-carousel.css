@@ -1,0 +1,12 @@
+﻿.img_border {
+    background: transparent;
+    height: 450px;
+    border: 1px solid #ff214f;
+    padding: 3px;
+    border-radius: 5px;
+}
+    .img_border .custom_img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }

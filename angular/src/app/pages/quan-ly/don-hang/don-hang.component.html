@@ -1,0 +1,81 @@
+<div [@routerTransition]>
+    <layout-page-list-custom>
+        <ng-container filterBox>
+            <filter-spin
+                (onSearch)="refresh()"
+                (onRefresh)="clear()"
+                (keydown.enter)="refresh()"
+                [isTypeButtonSearch]="true"
+                [isShowTitleSearch]="true"
+            >
+                <!-- <ng-container advancedSearch>
+        <div nz-col nzXs="24" nzMd="11" nzLg="6" class="gutter-row">
+            <ora-range-date-picker
+                titleFromDate="Từ ngày"
+                titleEndDate="Đến ngày"
+                [(startDateRange)]="searchDto.fromDate"
+                [(endDateRange)]="searchDto.toDate"
+            >
+            </ora-range-date-picker>
+        </div>
+    </ng-container> -->
+                <input
+                    nz-input
+                    type="text"
+                    class="txtSearchCustom"
+                    [(ngModel)]="searchDto.filter"
+                    placeholder="Nhập từ khóa để tìm kiếm..."
+                />
+            </filter-spin>
+        </ng-container>
+
+        <ng-container tableList>
+            <nz-card class="card-custom">
+                <table-custom
+                    #datatable
+                    [rows]="dataList"
+                    [isLoading]="isTableLoading"
+                    [totalRows]="totalItems"
+                    [(pageSize)]="pageSize"
+                    [(page)]="pageNumber"
+                    (pageSizeChange)="refresh()"
+                    (pageChange)="pageNumberChange()"
+                    (sortChange)="gridSort($event)"
+                    [(selectedDataItems)]="selectedDataItems"
+                    bordered="false"
+                    [scroll]="{ x: '600px' }"
+                    [isMulti]="true"
+                >
+                    <table-column key="billCode" header="Mã hóa đơn"></table-column>
+                    <table-column key="" header="Ngày thanh toán" width="200">
+                        <ng-template tableCell let-data>
+                            {{ data.datePrint | date : "dd/MM/YYYY HH:mm" }}
+                        </ng-template>
+                    </table-column>
+                    <table-column key="kieuMua" header="Kiểu mua" width="150"></table-column>
+                    <table-column key="" header="Tổng tiền" width="150">
+                        <ng-template tableCell let-data>
+                            {{ data.intoMoney | currency : "VND" : "VNĐ" | splitVND : data.intoMoney }}
+                        </ng-template>
+                    </table-column>
+                    <table-column header="" width="50" headerAlign="center" contentAlign="center" fixRight="true">
+                        <ng-template tableCell let-data>
+                            <button style="border: none !important" nz-button nz-dropdown [nzDropdownMenu]="menu4">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <nz-dropdown-menu #menu4="nzDropdownMenu">
+                                <ul nz-menu>
+                                    <li nz-menu-item>
+                                        <a (click)="showDetail(data)">
+                                            <i class="fas fa-info-circle"></i> Xem chi tiết
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nz-dropdown-menu>
+                        </ng-template>
+                    </table-column>
+                </table-custom>
+            </nz-card>
+        </ng-container>
+    </layout-page-list-custom>
+</div>

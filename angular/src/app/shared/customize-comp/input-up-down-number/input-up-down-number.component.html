@@ -1,0 +1,5 @@
+<div class="buttons_added">
+    <button class="minus is-form red" (click)="down()">-</button>
+    <nz-input-number #inputNumber [(ngModel)]="value" [nzMin]="0" [nzMax]="100" [nzDisabled]="true"></nz-input-number>
+    <button class="plus is-form blue" (click)="up()">+</button>
+</div>

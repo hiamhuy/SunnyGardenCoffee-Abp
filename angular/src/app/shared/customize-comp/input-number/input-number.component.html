@@ -1,0 +1,12 @@
+<input
+  #inputElement
+  nz-input
+  nz-tooltip
+  nzTooltipTrigger="focus"
+  nzTooltipPlacement="topLeft"
+  nzOverlayClassName="numeric-input"
+  [ngModel]="value"
+  [nzTooltipTitle]="title"
+  placeholder="Nhập số"
+  (ngModelChange)="onChange($event)"
+/>

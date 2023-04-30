@@ -1,0 +1,32 @@
+<li class="nav-item nav-user-menu">
+    <a href="javascript:;" class="nav-link" nz-dropdown [nzDropdownMenu]="dropdownMenu">
+        <div class="d-flex flex-row">
+            <img class="user-image img-circle elevation-2" src="assets/img/user.png" alt="User Image" />
+            <div class="d-block pl-2" style="font-size: 16px; font-weight: 600">
+                {{ shownLoginName }}
+            </div>
+        </div>
+    </a>
+    <!-- <div class="dropdown-menu dropdown-menu-right" #dropdownMenu>
+        <a class="dropdown-item" [routerLink]="['he-thong/users/change-password']">
+            <i class="fas fa-user-edit"></i> {{ "Thay đổi mật khẩu" | localize }}
+        </a>
+        <a class="dropdown-item" href="javascript:;" (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i> {{ "Đăng xuất" | localize }}
+        </a>
+    </div> -->
+    <nz-dropdown-menu #dropdownMenu="nzDropdownMenu">
+        <ul nz-menu>
+            <li nz-menu-item>
+                <a class="dropdown-item" [routerLink]="['he-thong/users/change-password']">
+                    <i class="fas fa-user-edit"></i> {{ "Thay đổi mật khẩu" | localize }}
+                </a>
+            </li>
+            <li nz-menu-item>
+                <a class="dropdown-item" href="javascript:;" (click)="logout()">
+                    <i class="fas fa-sign-out-alt"></i> {{ "Đăng xuất" | localize }}
+                </a>
+            </li>
+        </ul>
+    </nz-dropdown-menu>
+</li>

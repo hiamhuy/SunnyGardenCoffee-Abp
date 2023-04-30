@@ -1,0 +1,30 @@
+<div class="modal-body">
+    <div nz-row>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Tên</label> <span style="color: red">*</span>
+            <div>
+                <input nz-input required [(ngModel)]="data.name" #nameModel="ngModel" #nameEl />
+                <abp-validation-summary [control]="nameModel" [controlEl]="nameEl"></abp-validation-summary>
+            </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Số lượng</label> <span style="color: red">*</span>
+            <div>
+                <input nz-input required [(ngModel)]="data.amount" #soLuongModel="ngModel" #soLuongEl />
+                <abp-validation-summary [control]="soLuongModel" [controlEl]="soLuongEl"></abp-validation-summary>
+            </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+            <label>Thành tiền</label>
+            <div>
+                <input-price [value]="data.entryPrice" (valueOutput)="data.entryPrice = $event"></input-price>
+            </div>
+        </div>
+    </div>
+    <div *nzModalFooter>
+        <button nz-button nzType="primary" (click)="save()">
+            {{ title }}
+        </button>
+        <button nz-button nzType="default" (click)="close()">Hủy</button>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<div [id]="formId" class="modal-body">
+  <nz-tabset>
+    <nz-tab nzTitle="Chi tiết">
+      <div nz-row>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+          <div>
+            <label>Tên vai trò</label> <span style="color: red">*</span>
+          </div>
+          <div>
+            <input
+              nz-input
+              [(ngModel)]="role.name"
+              required
+              #nameModel="ngModel"
+              #nameEl
+              minlength="2"
+            />
+            <abp-validation-summary
+              [control]="nameModel"
+              [controlEl]="nameEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+          <div>
+            <label>Tên hiển thị</label> <span style="color: red">*</span>
+          </div>
+          <div>
+            <input
+              nz-input
+              [(ngModel)]="role.displayName"
+              required
+              #displayNameModel="ngModel"
+              #displayNameEl
+            />
+            <abp-validation-summary
+              [control]="displayNameModel"
+              [controlEl]="displayNameEl"
+            ></abp-validation-summary>
+          </div>
+        </div>
+        <div nz-col class="gutter-row" [nzSm]="24" [nzXs]="24">
+          <div><label>Ghi chú</label></div>
+          <div>
+            <textarea nz-input [(ngModel)]="role.description"></textarea>
+          </div>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab nzTitle="Quyền">
+      <div class="d-flex flex-column">
+        <ng-container *ngFor="let permission of permissions; index as i">
+          <label
+            nz-checkbox
+            [ngModel]="isPermissionChecked(permission.name)"
+            (ngModelChange)="onPermissionChange(permission, $event)"
+            >{{ permission.displayName }}</label
+          >
+        </ng-container>
+      </div>
+    </nz-tab>
+  </nz-tabset>
+</div>
+<div *nzModalFooter>
+  <button nz-button nzType="primary" (click)="save()">Thêm mới</button>
+  <button nz-button nzType="default" (click)="close()">Hủy</button>
+</div>

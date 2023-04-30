@@ -1,0 +1,25 @@
+﻿@using Abp.Authorization.Users
+@model SunnyGardenCoffee.Web.Models.Account.LoginFormViewModel
+@{
+    ViewBag.Title = "Đăng nhập";
+}
+@*@section scripts
+{
+    <environment names="Development">
+        <script src="~/view-resources/Views/Account/Login.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/view-resources/Views/Account/Login.min.js" asp-append-version="true"></script>
+    </environment>
+}*@
+<form id="LoginForm" asp-action="Login" method="post">
+    <div class="form">
+        <p class="heading">ĐĂNG NHẬP</p>
+       @* <input type="text" class="input" placeholder="Username">*@
+        <input type="text" class="input" placeholder="Tài khoản">
+        <input type="password" class="input" placeholder="Mật khẩu">
+        <button class="btn">Đăng nhập</button>
+    </div>
+</form>
+

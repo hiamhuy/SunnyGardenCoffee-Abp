@@ -1,0 +1,6 @@
+<nz-input-group [nzSuffix]="suffixPrice">
+    <input style="width: 100%" type="number" nz-input [(ngModel)]="value" (ngModelChange)="valueOutput.emit($event)" />
+</nz-input-group>
+<ng-template #suffixPrice>
+    <span>%</span>
+</ng-template>

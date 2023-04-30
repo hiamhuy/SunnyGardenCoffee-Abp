@@ -1,0 +1,107 @@
+<ng-container [ngSwitch]="tableSize" *ngIf="totalCount > 0; else khongDuLieuTpl">
+    <ng-container *ngSwitchCase="'default'">
+        <div nz-row class="form-group mt-3">
+            <div nz-col [nzSm]="7" [nzXs]="24">
+                <div style="display: flex">
+                    <ng-container [ngTemplateOutlet]="dangXemTpl"></ng-container>
+                    <ng-container *ngIf="checkScreen <= 576" [ngTemplateOutlet]="selectPageSizeTpl"></ng-container>
+                </div>
+            </div>
+            <div nz-col [nzSm]="17" [nzXs]="24" class="text-left {{ checkScreen <= 576 ? 'mt-2' : '' }}">
+                <div style="display: block" [ngStyle]="{ float: checkScreen <= 576 ? 'left' : 'right' }">
+                    <ng-container [ngTemplateOutlet]="btnChuyenTrangTpl"></ng-container>
+                    <ng-container [ngTemplateOutlet]="btnReloadTpl"></ng-container>
+                    <ng-container *ngIf="checkScreen > 576" [ngTemplateOutlet]="selectPageSizeTpl"></ng-container>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'sm'">
+        <div nz-row class="form-group mt-3">
+            <div nz-col nzSpan="24">
+                <ng-container [ngTemplateOutlet]="btnChuyenTrangTpl"></ng-container>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'md'">
+        <div nz-row class="form-group mt-3">
+            <div nz-col nzFlex="5">
+                <ng-container [ngTemplateOutlet]="btnChuyenTrangTpl"></ng-container>
+            </div>
+            <div nz-col nzFlex="3">
+                <ng-container [ngTemplateOutlet]="dangXemTpl"></ng-container>
+            </div>
+        </div>
+    </ng-container>
+</ng-container>
+
+<ng-template #khongDuLieuTpl>
+    <!-- <nz-empty style="margin-top: 20px;" [nzNotFoundContent]="contentTpl" class="kt-margin-t-5">
+      <ng-template #contentTpl>
+          <span>Không có dữ liệu !</span>
+      </ng-template>
+  </nz-empty> -->
+</ng-template>
+
+<ng-template #btnChuyenTrangTpl>
+    <nz-button-group>
+        <button nz-button nzType="default" title="Trang đầu" (click)="trangDauClick()" [disabled]="disableBackBtn()">
+            <i class="fas fa-step-backward"></i>
+        </button>
+        <button
+            nz-button
+            nzType="default"
+            title="Trang trước"
+            (click)="trangTruocClick()"
+            [disabled]="disableBackBtn()"
+        >
+            <i class="fas fa-caret-left"></i>
+        </button>
+    </nz-button-group>
+    <span class="font-weight-bolder ml-3 mr-2">Trang</span>
+    <input
+        nz-input
+        style="width: 48px"
+        (keydown)="keyDownInputPageIndex($event)"
+        [(ngModel)]="pageIndex"
+        (keyup.enter)="pageIndexEnter()"
+        (focusout)="onFocusOutPageIndexInput()"
+        nz-tooltip
+        nzTooltipTitle="Nhập số trang. Ấn enter"
+        nzTooltipPlacement="bottom"
+    />
+    <span class="font-weight-bolder mr-2"> / {{ getTotalPage() }}</span>
+    <nz-button-group>
+        <button nz-button nzType="default" title="Trang sau" (click)="trangSauClick()" [disabled]="disableNextBtn()">
+            <i class="fas fa-caret-right"></i>
+        </button>
+        <button nz-button nzType="default" title="Trang cuối" (click)="trangCuoiClick()" [disabled]="disableNextBtn()">
+            <i class="fas fa-step-forward"></i>
+        </button>
+    </nz-button-group>
+</ng-template>
+
+<ng-template #btnReloadTpl>
+    <button
+        nz-button
+        nzType="dashed"
+        class="ml-10"
+        nz-tooltip
+        nzTooltipTitle="Lấy lại dữ liệu"
+        (click)="refreshData.emit(1)"
+    >
+        <i class="fas fa-redo"></i>
+    </button>
+</ng-template>
+
+<!-- <ng-template #selectPageSizeTpl>
+  <nz-select style="width: 80px" class="ml-10" [(ngModel)]="pageSize" (ngModelChange)="onChangePageSize()">
+    <nz-option *ngFor="let pz of listPageSizeOptionsSelect" [nzValue]="pz.value" [nzLabel]="pz.display"></nz-option>
+  </nz-select>
+</ng-template> -->
+
+<ng-template #dangXemTpl>
+    <div class="font-weight-bolder {{ checkScreen <= 576 ? 'mt-1' : '' }}">
+        {{ getDangXemTxt() }}
+    </div>
+</ng-template>
